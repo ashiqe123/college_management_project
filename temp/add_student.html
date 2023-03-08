@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+ 
+</head>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <!-- Container wrapper -->
+    <div class="container-fluid">
+      <!-- Toggle button -->
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-mdb-toggle="collapse"
+        data-mdb-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <i class="fas fa-bars"></i>
+      </button>
+  
+      <!-- Collapsible wrapper -->
+      <div class=" collapse navbar-collapse" id="navbarSupportedContent">
+        <!-- Navbar brand -->
+        <a class="navbar-brand mt-2 mt-lg-0" href="">
+          <img
+            src="https://static.vecteezy.com/system/resources/thumbnails/006/174/322/small/academy-badge-logo-free-vector.jpg"
+            height="65"
+            alt="MDB Logo"
+            loading="eager"
+          />
+        </a>
+        <!-- Left links -->
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a  style="color:aliceblue;" class="nav-link" href="{% url 'home' %}">Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a  style="color:aliceblue;" class="nav-link" href="">STUDENTS</a>
+          </li>
+          
+  
+        </ul>
+ 
+        <!-- Left links -->
+      </div>
+      <!-- Collapsible wrapper -->
+  
+      <!-- Right elements -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+            <a  style="color:aliceblue;" class="nav-link" href="#">Welcome :{{user.username}}</a>
+          </li>
+        <li class="nav-item">
+          <a  style="color:aliceblue;" class="nav-link" href="#">profile</a>
+        </li>
+        <li class="nav-item">
+          <a  style="color:aliceblue;" class="nav-link" href="#">settings</a>
+        </li>
+        <li class="nav-item">
+          <a  style="color:aliceblue;" class="nav-link" href="#">logout</a>
+        </li>
+        {% endif %}
+      </ul>
+    <!-- Container wrapper -->
+  </nav>
+  <!-- Navbar -->
+  
+  <body>
+    <section style="background-image: url('{% static "images/school.jpg" %}');background-repeat:no-repeat;background-size:cover; " class="vh-100" >
+        <div class="container py-5 h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+              <div class="card shadow-2-strong" style="background-color: rgb(54, 53, 54);">
+                <div class="card-body p-5 text-center">
+                 
+                    <form  action="{% url 'add_student' %}" method="post">
+                        {% csrf_token %}
+
+                        <h3 style="color: white;">Add Student</h3>
+                        <div class="form-group mb-4">
+                            <input type="text" name="sn" placeholder="Student Name" class="form-control text-center">
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <input type="text" name="sa" placeholder="Student Address" class="form-control text-center">
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <input type="date" name="dob" placeholder=" date of birth"  class="form-control text-center"  >
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <input type="number" name='sp' placeholder="Student Phone" required="true"  class="form-control text-center">
+                        </div>
+                        
+                        <div class="form-group mb-4">
+                            <input type="text" name='edu' placeholder="Last Education" required="true"  class="form-control text-center">
+                        </div>
+                        <div class="form-group mb-4">
+                            <input type="date" name="jd" placeholder="Joining Date" class="form-control text-center">
+                        </div>
+                        <div class="form-outline mb-4">
+                         
+                            <select  class="form-control " name="cn">
+                              {% for c in cr %}
+                              <option value="{{c.id}}">{{c.course_name}}</option>
+                              {% endfor %}
+                              
+                          </div>
+                          <br>
+
+                        <div class="form-group mb-4">
+                            <input type="submit" class="form-control bg-success text-center">
+                        </div>
+                    </form>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    
+  </body>
+  </html>
+  

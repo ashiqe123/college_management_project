@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .dropbtn {
+          color: #ddd;
+          font-size: 16px;
+          border: none;
+          cursor: pointer;
+        }
+        
+        
+        .dropdown {
+          float: right;
+          position: relative;
+          display: inline-block;
+        }
+        
+        .dropdown-content {
+          display: none;
+          position: absolute;
+          background-color: #f1f1f1;
+          min-width: 160px;
+          overflow: auto;
+          box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+          right: 0;
+          z-index: 1;
+        }
+        
+        .dropdown-content a {
+          color: black;
+          padding: 12px 16px;
+          text-decoration: none;
+          display: block;
+        }
+        
+        .dropdown-content a:hover {background-color: #ddd;}
+        
+        .show {display: block;}
+        </style>
+</head>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <!-- Container wrapper -->
+    <div class="container-fluid">
+      <!-- Toggle button -->
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-mdb-toggle="collapse"
+        data-mdb-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <i class="fas fa-bars"></i>
+      </button>
+  
+      <!-- Collapsible wrapper -->
+      <div class=" collapse navbar-collapse" id="navbarSupportedContent">
+        <!-- Navbar brand -->
+        <a class="navbar-brand mt-2 mt-lg-0" href="">
+          <img
+            src="https://static.vecteezy.com/system/resources/thumbnails/006/174/322/small/academy-badge-logo-free-vector.jpg"
+            height="65"
+            alt="MDB Logo"
+            loading="eager"
+          />
+        </a>
+        <!-- Left links -->
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+                <a  style="color:aliceblue;" class="nav-link" href="#">STAFF</a>
+              </li>
+          <li class="nav-item">
+            <a  style="color:aliceblue;" class="nav-link" href="#">Dashboard</a>
+          </li>
+         
+         
+                 
+<div class="dropdown">
+    <li style="color:aliceblue;" onclick="myFunction()" class="nav-link dropbtn">COURSES <i class="fa fa-caret-down"></i></li>
+    
+    <div id="myDropdown" class="dropdown-content">
+      <a href="{% url 'show_course' %}">COURSES</a>
+      <a href="#about">STAFF</a>
+      <a href="{% url 'show_student' %}">STUDENTS</a>
+    </div>
+  </div>
+        </ul>
+ 
+        <!-- Left links -->
+      </div>
+      <!-- Collapsible wrapper -->
+  
+      <!-- Right elements -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+            <a  style="color:aliceblue;" class="nav-link" href="#">Welcome :{{user.username}}</a>
+          </li>
+        <li class="nav-item">
+          <a  style="color:aliceblue;" class="nav-link" href="#">profile</a>
+        </li>
+        <li class="nav-item">
+          <a  style="color:aliceblue;" class="nav-link" href="#">settings</a>
+        </li>
+        <li class="nav-item">
+          <a  style="color:aliceblue;" class="nav-link" href="{% url 'lgout' %}">logout</a>
+        </li>
+        {% endif %}
+      </ul>
+    <!-- Container wrapper -->
+  </nav>
+  <!-- Navbar -->
+  
+  <body>
+    <script>
+        /* When the user clicks on the button, 
+        toggle between hiding and showing the dropdown content */
+        function myFunction() {
+          document.getElementById("myDropdown").classList.toggle("show");
+        }
+        
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function(event) {
+          if (!event.target.matches('.dropbtn')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+              var openDropdown = dropdowns[i];
+              if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+              }
+            }
+          }
+        }
+        </script>
+        
+<body>  
+    <div style= "width: 100%; height: 650px;background-image: url('https://thumbs.dreamstime.com/b/back-to-school-background-copy-space-121767227.jpg');background-repeat: no-repeat;background-size: cover; ">  
+
+    <div style=" width: 50%; height: 550px; float:right;">  
+        <div class=" h-100 row d-flex justify-content-center align-items-center">
+            <div class="col-12 col-lg-6 col-xl-5 col-md-8">
+               
+                <div class="card box-shadow mb-5 mt-5 " style="border-radius: 2rem;">
+                    <div style="background-color: rgb(5, 1, 8);border-radius: 1rem;" class="card-body p-2  text-center">
+                       
+                        
+        <p style="color: #ddd;" data-toggle="modal"data-target="#modalbutton"><a href="{% url 'e_tcr' %}">EDIT PROFILE</a></p>
+        <div class="modal fade" id="modalbutton">
+            <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                                <h4>sign here</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+    
+                        </div>
+                        <div class="modal-body">
+                         
+                        </div>
+                      
+                    </div>
+            </div>
+        </div>
+     
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>  
+
+    <div style=" width:50%; height: 550px; float:right;">  
+        <div class=" h-100 row d-flex justify-content-center align-items-center">
+            <div class="col-12 col-lg-6 col-xl-5 col-md-8">
+               
+                <div class="card box-shadow ml-3 mb-5 mt-5 " style="border-radius: 2rem;">
+                    <div style="background-color: rgb(66, 65, 65);border-radius: 1rem;width: 45vw;" class=" card-body p-2  text-center">
+                       
+                        <p style="color: #f8f8f8;" >PROFILE</p>
+                        
+                        <div class=" h-100 row d-flex justify-content-center align-items-center">
+                          <div class="col-12 col-lg-6 col-xl-5 col-md-8">
+                              <div class="card box-shadow mb-5 mt-5 " style="border-radius: 2rem;">
+                                  <div style="background-color: rgb(209, 183, 183);border-radius: 1rem;width: 20vw;" class="card-body   text-center">
+                               <img src="{{staf.profile.url}}" width="80vw" height="70vh" alt="">
+                                    <p>USERNAME  : {{staf.user.username}}</p>    
+                                    <p>FIRSTNAME :{{staf.user.first_name}}</p>  
+                                    <p>LASTNAME  :{{staf.user.last_name}}</p> 
+                                    <p>EMAIL : {{staf.user.email}}</p> 
+                                    <p>ADDRESS :{{staf.address}}</p> 
+                                    <p>PHONE NO :{{staf.phone}}</p> 
+                                    <p>DATE OF BIRTH :{{staf.dob}}</p> 
+                                    <p>SEX :{{staf.gender}}</p> 
+                                    <p>SUBJECT :{{staf.course.course_name}}</p>
+                                  </div>
+                              </div>
+                          </div>
+                      </div> 
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </div>  
+
+</div>  
+</body>  
+
+
+  </body>
+  </html>
+  

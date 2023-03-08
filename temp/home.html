@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% load static %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .dropbtn {
+          color: #ddd;
+          font-size: 16px;
+          border: none;
+          cursor: pointer;
+        }
+        
+        
+        .dropdown {
+          float: right;
+          position: relative;
+          display: inline-block;
+        }
+        
+        .dropdown-content {
+          display: none;
+          position: absolute;
+          background-color: #f1f1f1;
+          min-width: 160px;
+          overflow: auto;
+          box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+          right: 0;
+          z-index: 1;
+        }
+        
+        .dropdown-content a {
+          color: black;
+          padding: 12px 16px;
+          text-decoration: none;
+          display: block;
+        }
+        
+        .dropdown-content a:hover {background-color: #ddd;}
+        
+        .show {display: block;}
+        </style>
+</head>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <!-- Container wrapper -->
+    <div class="container-fluid">
+      <!-- Toggle button -->
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-mdb-toggle="collapse"
+        data-mdb-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <i class="fas fa-bars"></i>
+      </button>
+  
+      <!-- Collapsible wrapper -->
+      <div class=" collapse navbar-collapse" id="navbarSupportedContent">
+        <!-- Navbar brand -->
+        <a class="navbar-brand mt-2 mt-lg-0" href="">
+          <img
+            src="https://static.vecteezy.com/system/resources/thumbnails/006/174/322/small/academy-badge-logo-free-vector.jpg"
+            height="65"
+            alt="MDB Logo"
+            loading="eager"
+          />
+        </a>
+        <!-- Left links -->
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a  style="color:aliceblue;" class="nav-link" href="#">Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a  style="color:aliceblue;" class="nav-link" href="{% url 'course' %}">COURSE</a>
+          </li>
+          <li class="nav-item">
+            <a  style="color:aliceblue;" class="nav-link" href="{% url 'student' %}">STUDENT</a>
+          </li>
+                 
+<div class="dropdown">
+    <li style="color:aliceblue;" onclick="myFunction()" class="nav-link dropbtn">VIEW <i class="fa fa-caret-down"></i></li>
+    
+    <div id="myDropdown" class="dropdown-content">
+      <a href="{% url 'show_course' %}">COURSES</a>
+      <a href="{% url 'sh_staff' %}">STAFF</a>
+      <a href="{% url 'show_student' %}">STUDENTS</a>
+    </div>
+  </div>
+        </ul>
+ 
+        <!-- Left links -->
+      </div>
+      <!-- Collapsible wrapper -->
+  
+      <!-- Right elements -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+            <a  style="color:aliceblue;" class="nav-link" href="#">Welcome :{{user.username}}</a>
+          </li>
+        <li class="nav-item">
+          <a  style="color:aliceblue;" class="nav-link" href="#"></a>
+        </li>
+        <li class="nav-item">
+          <a  style="color:aliceblue;" class="nav-link" href="#">settings</a>
+        </li>
+        <li class="nav-item">
+          <a  style="color:aliceblue;" class="nav-link" href="{% url 'lgout' %}">logout</a>
+        </li>
+        {% endif %}
+      </ul>
+    <!-- Container wrapper -->
+  </nav>
+  <!-- Navbar -->
+  
+  <body style="background-image: url('https://images.unsplash.com/photo-1525921429624-479b6a26d84d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y29sbGVnZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60');background-repeat: no-repeat;background-size: cover;">
+    <script>
+        /* When the user clicks on the button, 
+        toggle between hiding and showing the dropdown content */
+        function myFunction() {
+          document.getElementById("myDropdown").classList.toggle("show");
+        }
+        
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function(event) {
+          if (!event.target.matches('.dropbtn')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+              var openDropdown = dropdowns[i];
+              if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+              }
+            }
+          }
+        }
+        </script>
+        <div>
+          <marquee behavior="" class="container" direction="">Admission Open <span class="p-5">visit us @ wwww.demoschool.co.in</span> </marquee>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div  class="col"> 
+                  <div class="card box-shadow mb-2 p-5">
+                    <div class="card-body box-shadow bg-danger p-5">
+                      <h5>STUDENT</h5>
+                      <h1 class="text-center">{{std}}</h1>
+                    </div>
+                  </div>
+                </div>
+                <div  class="col"> 
+                  <div class="card box-shadow mb-2 p-5">
+                    <div class="card-body box-shadow bg-danger p-5">
+                      <h5>COURSES</h5>
+                      <h1 class="text-center">{{obj}}</h1>
+                    </div>
+                  </div>
+                </div>
+                <div  class="col"> 
+                  <div class="card box-shadow mb-2 p-5">
+                    <div class="card-body box-shadow bg-danger p-5">
+                      <h5>STAFF</h5>
+                      <h1 class="text-center">{{s}}</h1>
+                    </div>
+                  </div>
+                </div>
+               
+        </div>
+  </body>
+  </html>
+  

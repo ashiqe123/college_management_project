@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<body class=" shadow card" style="background-image: url(https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=872&q=80);background-repeat: no-repeat;background-size: cover;">
+    <div class=" container">
+    <form action="{% url 'do_login' %}" method="post" class="was-validated">
+      {% csrf_token %}
+        <div class="form-group">
+          <label >Username:</label>
+          <input type="text" class="form-control"  placeholder="Enter username" name="user" required>
+          <div class="valid-feedback">Valid.</div>
+          <div class="invalid-feedback">Please fill out this field.</div>
+        </div>
+        <div class="form-group">
+          <label >Password:</label>
+          <input type="password" class="form-control" placeholder="Enter password" name="psw" required>
+          <div class="valid-feedback">Valid.</div>
+          <div class="invalid-feedback">Please fill out this field.</div>
+        </div>
+        <div class="form-group form-check">
+          <label class="form-check-label">
+            <input class="form-check-input" type="checkbox" name="remember" required> I agree on blabla.
+            <div class="valid-feedback">Valid.</div>
+            <div class="invalid-feedback">Check this checkbox to continue.</div>
+          </label>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+</body>
+</div>
+{% endblock %}

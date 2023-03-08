@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+   
+</head>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <!-- Container wrapper -->
+    <div class="container-fluid">
+      <!-- Toggle button -->
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-mdb-toggle="collapse"
+        data-mdb-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <i class="fas fa-bars"></i>
+      </button>
+  
+      <!-- Collapsible wrapper -->
+      <div class=" collapse navbar-collapse" id="navbarSupportedContent">
+        <!-- Navbar brand -->
+        <a class="navbar-brand mt-2 mt-lg-0" href="">
+          <img
+            src="https://static.vecteezy.com/system/resources/thumbnails/006/174/322/small/academy-badge-logo-free-vector.jpg"
+            height="65"
+            alt="MDB Logo"
+            loading="eager"
+          />
+        </a>
+        <!-- Left links -->
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a  style="color:aliceblue;" class="nav-link" href="#">Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a  style="color:aliceblue;" class="nav-link" href="{% url 'student' %}">STUDENT</a>
+          </li>
+          
+  
+        </ul>
+ 
+        <!-- Left links -->
+      </div>
+      <!-- Collapsible wrapper -->
+  
+      <!-- Right elements -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+            <a  style="color:aliceblue;" class="nav-link" href="#">Welcome :{{user.username}}</a>
+          </li>
+        <li class="nav-item">
+          <a  style="color:aliceblue;" class="nav-link" href="#">profile</a>
+        </li>
+        <li class="nav-item">
+          <a  style="color:aliceblue;" class="nav-link" href="#">settings</a>
+        </li>
+        <li class="nav-item">
+          <a  style="color:aliceblue;" class="nav-link" href="#">logout</a>
+        </li>
+        {% endif %}
+      </ul>
+    <!-- Container wrapper -->
+  </nav>
+  {% block content %}
+<body style="background-image: url('https://i.pinimg.com/736x/48/77/4d/48774dfd4c665b9f28df2cd3e477b8a1.jpg');background-size: cover;">
+  <center><h3 style="background-color: rgba(247, 243, 243,0.5);margin-left: 300px;margin-right: 300px;">Student List</h3></center>
+ <div class="vh-100 " style=" background-color: rgba(240, 248, 255,0.3);">
+  <table class=" table table-hovered bg-light ">
+    <thead>
+        <tr>
+            <td>username</td>
+            <td>first name</td>
+            <td>last name</td>
+            <th>Address</th>
+            <th>Date of Birth</th>
+            <th>Phone</th>
+            <th>gender</th>
+           
+            <th>Course</th>
+            
+            <th >Action</th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+        {% for s in stf %}
+        <tr>
+            <td>{{s.user.username}}</td>
+            <td>{{s.user.first_name}}</td>
+            <td>{{s.user.last_name}}</td>
+            <td>{{s.address}}</td>
+            <td>{{s.dob}}</td>
+            <td>{{s.phone}}</td>
+            <td>{{s.course.course_name}}</td>
+          
+            <td><a class="btn btn-danger" href="{% url 'Dele' s.user.id  %}">DELETE</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+</div>
+</body>
+{% endblock %}

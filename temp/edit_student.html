@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+   
+</head>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <!-- Container wrapper -->
+    <div class="container-fluid">
+      <!-- Toggle button -->
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-mdb-toggle="collapse"
+        data-mdb-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <i class="fas fa-bars"></i>
+      </button>
+  
+      <!-- Collapsible wrapper -->
+      <div class=" collapse navbar-collapse" id="navbarSupportedContent">
+        <!-- Navbar brand -->
+        <a class="navbar-brand mt-2 mt-lg-0" href="">
+          <img
+            src="https://cdn5-ss6.sharpschool.com/UserFiles/Servers/Server_19363674/Image/HSHMSchoolCrest.png"
+            height="65"
+            alt="MDB Logo"
+            loading="eager"
+          />
+        </a>
+        <!-- Left links -->
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a  style="color:aliceblue;" class="nav-link" href="#">Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a  style="color:aliceblue;" class="nav-link" href="{% url 'student' %}">STUDENT</a>
+          </li>
+          
+  
+        </ul>
+ 
+        <!-- Left links -->
+      </div>
+      <!-- Collapsible wrapper -->
+  
+      <!-- Right elements -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+            <a  style="color:aliceblue;" class="nav-link" href="#">Welcome :{{user.username}}</a>
+          </li>
+        <li class="nav-item">
+          <a  style="color:aliceblue;" class="nav-link" href="#">profile</a>
+        </li>
+        <li class="nav-item">
+          <a  style="color:aliceblue;" class="nav-link" href="#">settings</a>
+        </li>
+        <li class="nav-item">
+          <a  style="color:aliceblue;" class="nav-link" href="#">logout</a>
+        </li>
+        {% endif %}
+      </ul>
+    <!-- Container wrapper -->
+  </nav>
+<body style="background-image: url('{% static "images/school.jpg" %}');background-repeat:no-repeat;background-size:cover ">
+    
+
+    <section class="vh-100" >
+        <div class="container py-5 h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+              <div class="card shadow-2-strong" style="border-radius: 1rem;background-color: rgb(150, 140, 140) ;">
+                <div class="card-body p-5 text-center">
+                 
+                    <form  class="py-5" action="{% url 'edit_student' estd.id  %}" method="post">
+                        {% csrf_token %}
+
+                        <h3 style="color: white;">Edit Student</h3>
+                        <div class="form-group mb-4">
+                            <input type="text" name="sname" value="{{estd.s_name}}" placeholder="Student Name" class="form-control text-center">
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <input type="text" name="sad" value="{{estd.s_address}}" placeholder="Student Address" class="form-control text-center">
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <input type="date" name="dob" value="{{estd.s_dob |date:'Y-m-d'}}" placeholder="Student Age" class="form-control text-center">
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <input type="number" name="sp" value="{{estd.s_phone}}" placeholder="Student Phone" class="form-control text-center">
+                        </div>
+                        <div class="form-group mb-4">
+                            <input type="text" name="edu" value="{{estd.s_education}}" placeholder="Qualification" class="form-control text-center">
+                        </div>
+                        <div class="form-group mb-4">
+                            <input type="date" name="jod" value="{{estd.j_date|date:'Y-m-d'}}" placeholder="Joining Date" class="form-control text-center">
+                        </div>
+
+                        <div class="form-outline mb-4">
+                            <select  class="form-control " name="sel">
+                                {% for c in ecrs %}
+                                {% if c.id == estd.course.id %}
+                                <option value="{{c.id}} " selected >{{c.course_name}}</option>
+                                {% else %}
+                                <option value="{{c.id}} "  >{{c.course_name}}</option>
+                                {% endif %}
+
+                                {% endfor %}
+                          </div>
+                                
+                        <div class="form-group mb-4">
+                            <input type="submit" class="form-control bg-success text-center">
+                        </div>
+                    </form>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+</body>
+</html>
